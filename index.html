@@ -2,83 +2,122 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Cai Jiacheng - About Me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cai Jiacheng - Personal Website</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-
     body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+      font-family: Arial, sans-serif;
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
       color: #333;
-      max-width: 720px;
-      margin: 60px auto;
-      padding: 40px;
-      border-radius: 20px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+    }
+
+    header {
       text-align: center;
     }
 
-    h1 {
-      font-weight: 600;
-      font-size: 3rem;
-      margin-bottom: 0.3em;
-      color: #344055;
-    }
-
-    h2 {
-      font-weight: 400;
-      font-size: 1.5rem;
-      color: #344055aa;
-      margin-bottom: 1.8em;
-    }
-
-    img {
-      width: 180px;
-      height: 180px;
-      object-fit: cover;
+    img.avatar {
+      width: 150px;
+      height: 150px;
       border-radius: 50%;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-      margin-bottom: 1.8em;
+      object-fit: cover;
+      margin-bottom: 15px;
+      border: 3px solid #2196f3;
     }
 
-    p {
-      font-size: 1.25rem;
-      line-height: 1.6;
-      margin: 15px 0;
-    }
-
-    .highlight {
-      color: #6c63ff;
-      font-weight: 600;
+    h1 {
+      margin-bottom: 5px;
     }
 
     a {
-      color: #6c63ff;
+      color: #2196f3;
       text-decoration: none;
-      font-weight: 600;
     }
 
-    a:hover {
-      text-decoration: underline;
+    .button {
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 5px;
+      margin: 20px auto;
+      display: block;
+    }
+
+    .button:hover {
+      background-color: #0b7dda;
+    }
+
+    #aboutMeContent {
+      display: none;
+      background: white;
+      padding: 20px;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     }
 
     footer {
-      margin-top: 3em;
-      font-size: 0.9rem;
+      text-align: center;
+      margin-top: 50px;
       color: #777;
+      font-size: 14px;
+    }
+
+    ul {
+      padding-left: 20px;
     }
   </style>
 </head>
 <body>
-  <img src="your-photo.jpg" alt="Cai Jiacheng photo" />
-  <h1>Hello, I'm Cai Jiacheng</h1>
-  <h2>International Student & Coding Enthusiast</h2>
-  <p>I come from <span class="highlight">Fujian, China</span>, currently studying and practicing programming on my own.</p>
-  <p>I am passionate about learning new technologies and improving my coding skills every day.</p>
-  <p>If you'd like to reach out, feel free to <a href="mailto:1328406073@qq.com">contact me via email</a> or visit my <a href="https://github.com/20031023-cjc" target="_blank">GitHub profile</a>.</p>
+
+  <header>
+    <!-- 替换为你上传的图片名 -->
+    <img src="your-photo.jpg" alt="Your Photo" class="avatar" />
+    <h1>Cai Jiacheng</h1>
+    <p>International student from Fujian, China. Currently practicing coding and programming.</p>
+    <p>
+      📧 <a href="mailto:1328406073@qq.com">1328406073@qq.com</a> |
+      💻 <a href="https://github.com/20031023-cjc" target="_blank">GitHub</a>
+    </p>
+  </header>
+
+  <button class="button" onclick="toggleAboutMe()">About Me</button>
+
+  <div id="aboutMeContent">
+    <h2>Language Skills</h2>
+    <ul>
+      <li>TOEFL: 90</li>
+      <li>JLPT N1 (Japanese)</li>
+    </ul>
+
+    <h2>Work Experience</h2>
+    <ul>
+      <li>Sep 2023 – Mar 2025: Part-time at 7-Eleven</li>
+      <li>Sep 2024 – Mar 2025: Admin Assistant at Keiyo Academy</li>
+      <li>Dec 2024 – Present: ECZ (English Community Zone), Toyo University</li>
+    </ul>
+
+    <h2>Self PR</h2>
+    <p>
+      I speak multiple languages. Since high school, I have often helped people around me solve language-related problems, helping them study and live more smoothly.
+    </p>
+  </div>
 
   <footer>
     © 2025 Cai Jiacheng
   </footer>
+
+  <script>
+    function toggleAboutMe() {
+      const content = document.getElementById("aboutMeContent");
+      content.style.display = content.style.display === "none" || content.style.display === "" ? "block" : "none";
+    }
+  </script>
+
 </body>
 </html>
