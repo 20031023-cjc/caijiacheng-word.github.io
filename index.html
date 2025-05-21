@@ -1,421 +1,284 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Cai Jiacheng's personal introduction site. International student and programmer in Japan." />
-  <title>Cai Jiacheng - Personal Website</title>
-  <style>
-    /* RESET */
-    *, *::before, *::after {
-      box-sizing: border-box;
-    }
-    body, html {
-      margin: 0; padding: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #fefefe;
-      color: #333;
-      line-height: 1.8;
-      overflow-x: hidden;
-      transition: background-color 0.5s, color 0.5s;
-    }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cai Jiacheng - Personal Website</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 
-    /* Dark mode */
-    body.dark {
-      background-color: #121212;
-      color: #ddd;
+  /* Reset */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'Roboto', sans-serif;
+    background: linear-gradient(135deg, #e0f7fa, #e1bee7);
+    color: #333;
+    margin: 0;
+    padding: 0;
+    animation: fadeInPage 1s ease forwards;
+    opacity: 0;
+  }
+  @keyframes fadeInPage {
+    to {
+      opacity: 1;
     }
-
-    /* Loading screen animation */
-    #loading-screen {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: #2c3e50;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      color: white;
-      font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: 2px;
-      animation: fadeOut 1s ease forwards;
-      animation-delay: 3s;
-    }
-    @keyframes fadeOut {
-      to {
-        opacity: 0;
-        visibility: hidden;
-      }
-    }
-
-    /* Main container */
+  }
+  .container {
+    max-width: 900px;
+    margin: 50px auto 80px;
+    background: #fff;
+    padding: 40px 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  }
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  img.avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 4px solid #7e57c2;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    cursor: pointer;
+  }
+  img.avatar:hover {
+    transform: rotate(10deg) scale(1.12);
+    box-shadow: 0 8px 24px rgba(126, 87, 194, 0.9);
+  }
+  h1 {
+    margin-bottom: 5px;
+    font-size: 2.8em;
+    color: #512da8;
+  }
+  p.tagline {
+    font-style: italic;
+    color: #666;
+    margin-bottom: 15px;
+    font-size: 18px;
+  }
+  a {
+    color: #7e57c2;
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  a:hover {
+    color: #512da8;
+    text-decoration: underline;
+  }
+  .social {
+    margin-top: 15px;
+  }
+  .social a {
+    margin: 0 15px;
+    font-size: 28px;
+    display: inline-block;
+    transition: transform 0.3s ease, color 0.3s ease;
+    user-select: none;
+  }
+  .social a:hover {
+    color: #512da8;
+    transform: scale(1.3) rotate(10deg);
+  }
+  .button {
+    background-color: #7e57c2;
+    color: white;
+    border: none;
+    padding: 16px 48px;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 30px;
+    margin: 30px auto 0;
+    display: block;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 6px 15px rgba(126, 87, 194, 0.5);
+  }
+  .button:hover {
+    background-color: #5e35b1;
+    box-shadow: 0 8px 25px rgba(94, 53, 177, 0.7);
+  }
+  .button:active {
+    transform: scale(0.95);
+  }
+  #aboutMeContent {
+    max-height: 0;
+    overflow: hidden;
+    background: #f3e5f5;
+    padding: 0 30px;
+    margin-top: 20px;
+    border-radius: 15px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+    opacity: 0;
+    transition: max-height 0.7s ease, padding 0.7s ease, opacity 0.7s ease;
+  }
+  #aboutMeContent.open {
+    max-height: 1500px;
+    padding: 30px;
+    opacity: 1;
+  }
+  .card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    padding: 25px 35px;
+    margin-bottom: 30px;
+    transition: box-shadow 0.3s ease;
+  }
+  .card:hover {
+    box-shadow: 0 8px 28px rgba(0,0,0,0.18);
+  }
+  h2 {
+    color: #6a1b9a;
+    margin-bottom: 20px;
+    border-bottom: 3px solid #7e57c2;
+    padding-bottom: 10px;
+    font-weight: 700;
+  }
+  ul {
+    padding-left: 22px;
+    margin-top: 0;
+    margin-bottom: 20px;
+  }
+  li {
+    margin-bottom: 12px;
+    font-size: 17px;
+  }
+  .skill {
+    margin-bottom: 22px;
+  }
+  .skill-name {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 16px;
+    color: #5d3a94;
+  }
+  .skill-bar {
+    background: #ddd;
+    border-radius: 12px;
+    overflow: hidden;
+    height: 18px;
+    box-shadow: inset 0 2px 6px rgba(0,0,0,0.1);
+  }
+  .skill-level {
+    height: 100%;
+    background: linear-gradient(90deg, #7e57c2, #512da8);
+    border-radius: 12px 0 0 12px;
+    width: 0;
+    transition: width 1.8s ease-in-out;
+  }
+  .intro-text {
+    font-size: 17px;
+    line-height: 1.6;
+    color: #4a3a71;
+    margin-bottom: 30px;
+  }
+  footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #666;
+    font-size: 15px;
+    background: #f7f2fb;
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.05);
+  }
+  /* Responsive */
+  @media (max-width: 600px) {
     .container {
-      max-width: 900px;
-      margin: 3rem auto 5rem;
-      padding: 0 20px;
+      margin: 30px 15px 60px;
+      padding: 30px 20px;
     }
-
-    /* Avatar */
-    .avatar-wrapper {
-      width: 160px;
-      margin: 0 auto 20px;
-      cursor: pointer;
-      border-radius: 50%;
-      overflow: hidden;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
-      transition: box-shadow 0.3s ease;
-      position: relative;
+    h1 {
+      font-size: 2.2em;
     }
-    .avatar-wrapper:hover {
-      box-shadow: 0 12px 25px rgba(0, 123, 255, 0.6);
+    .button {
+      padding: 14px 36px;
+      font-size: 18px;
     }
-    .avatar-wrapper img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 50%;
-      transition: transform 0.5s ease;
-    }
-    .avatar-wrapper:hover img {
-      transform: scale(1.1) rotate(5deg);
-    }
-
-    /* Modal */
-    #avatar-modal {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(0,0,0,0.85);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.3s ease;
-      z-index: 10000;
-      padding: 20px;
-    }
-    #avatar-modal.active {
-      opacity: 1;
-      visibility: visible;
-    }
-    #avatar-modal .modal-content {
-      background: white;
-      border-radius: 12px;
-      padding: 20px;
-      max-width: 400px;
-      max-height: 80vh;
-      overflow-y: auto;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-      color: #222;
-      position: relative;
-    }
-    body.dark #avatar-modal .modal-content {
-      background: #222;
-      color: #eee;
-    }
-    #avatar-modal img {
-      width: 100%;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-    #avatar-modal .close-btn {
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      background: #eee;
-      border: none;
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    #avatar-modal .close-btn:hover {
-      background: #ddd;
-    }
-    body.dark #avatar-modal .close-btn {
-      background: #444;
-      color: #eee;
-    }
-    body.dark #avatar-modal .close-btn:hover {
-      background: #666;
-    }
-
-    /* Titles */
-    h1, h2 {
-      text-align: center;
-      margin-bottom: 0.6rem;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
-    }
-    body.dark h1, body.dark h2 {
-      text-shadow: 1px 1px 3px rgba(255,255,255,0.2);
-    }
-
-    /* About Me buttons area */
-    .about-me {
-      margin-top: 40px;
-      text-align: center;
-    }
-
-    .btn-group {
-      margin-bottom: 20px;
-    }
-    .btn-group button {
-      background: #1e90ff;
-      border: none;
-      color: white;
-      font-weight: 600;
-      padding: 10px 22px;
-      margin: 0 10px;
-      border-radius: 30px;
-      cursor: pointer;
-      font-size: 1rem;
-      position: relative;
-      overflow: hidden;
-      transition: background-color 0.3s ease, box-shadow 0.3s ease;
-      user-select: none;
-      box-shadow: 0 4px 12px rgba(30,144,255,0.4);
-    }
-    .btn-group button:hover, .btn-group button.active {
-      background: #005fbd;
-      box-shadow: 0 6px 18px rgba(0,95,189,0.8);
-    }
-    /* Ripple effect */
-    .btn-group button::after {
-      content: "";
-      position: absolute;
-      border-radius: 50%;
-      width: 100px;
-      height: 100px;
-      top: 50%;
-      left: 50%;
-      pointer-events: none;
-      transform: translate(-50%, -50%) scale(0);
-      background: rgba(255,255,255,0.3);
-      transition: transform 0.5s ease, opacity 1s ease;
-      opacity: 0;
-      z-index: 1;
-    }
-    .btn-group button:active::after {
-      transform: translate(-50%, -50%) scale(1);
-      opacity: 1;
-      transition: 0s;
-    }
-
-    /* About Me content */
-    .about-content {
-      max-width: 700px;
-      margin: 0 auto;
-      min-height: 150px;
-      padding: 20px;
-      border-radius: 12px;
-      background: #e8f0fe;
-      box-shadow: 0 6px 18px rgba(30,144,255,0.2);
-      font-size: 1.1rem;
-      color: #333;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.5s ease, transform 0.5s ease;
-    }
-    .about-content.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
-    body.dark .about-content {
-      background: #1a237e;
-      color: #ddd;
-      box-shadow: 0 6px 18px rgba(63,81,181,0.5);
-    }
-
-    /* Social icons */
-    .social-links {
-      margin-top: 50px;
-      text-align: center;
-    }
-    .social-links a {
-      margin: 0 15px;
-      font-size: 2rem;
-      color: #1e90ff;
-      display: inline-block;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      position: relative;
-      cursor: pointer;
-    }
-    .social-links a:hover {
-      transform: scale(1.3) rotate(15deg);
-      box-shadow: 0 4px 15px rgba(30,144,255,0.6);
-      color: #005fbd;
-    }
-
-    /* Dark mode toggle button */
-    #darkModeToggle {
-      position: fixed;
-      bottom: 20px;
-      left: 20px;
-      background: #1e90ff;
-      border: none;
-      color: white;
-      padding: 12px 18px;
-      font-weight: 700;
-      font-size: 1rem;
-      border-radius: 30px;
-      cursor: pointer;
-      box-shadow: 0 6px 18px rgba(30,144,255,0.6);
-      user-select: none;
-      transition: background-color 0.3s ease;
-      z-index: 10001;
-    }
-    #darkModeToggle:hover {
-      background: #005fbd;
-    }
-
-    /* Responsive */
-    @media (max-width: 600px) {
-      .btn-group button {
-        margin: 8px 5px;
-        width: 90px;
-        font-size: 0.9rem;
-        padding: 8px 0;
-      }
-      .avatar-wrapper {
-        width: 120px;
-      }
-      .container {
-        margin: 2rem 15px 4rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-  <div id="loading-screen">Loading...</div>
 
-  <div class="container" role="main" aria-label="Personal introduction of Cai Jiacheng">
-
+<div class="container" role="main">
+  <header>
+    <img src="your-photo.jpg" alt="Your Photo" class="avatar" />
     <h1>Cai Jiacheng</h1>
-    <h2>International Student & Programmer in Japan</h2>
-
-    <div class="avatar-wrapper" tabindex="0" aria-label="Click or press enter to view avatar in large size" role="button" aria-haspopup="dialog" aria-controls="avatar-modal">
-      <img src="https://cdn.jsdelivr.net/gh/cai-jiacheng/cai-jiacheng.github.io/images/face.webp" alt="Portrait photo of Cai Jiacheng" loading="lazy" width="160" height="160" />
+    <p class="tagline">International student from Fujian, China. Currently practicing coding and programming.</p>
+    <p>
+      📧 <a href="mailto:1328406073@qq.com">1328406073@qq.com</a> | 
+      💻 <a href="https://github.com/20031023-cjc" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </p>
+    <div class="social" aria-label="Social Media Links">
+      <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" title="LinkedIn" aria-label="LinkedIn">🔗</a>
+      <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Twitter" aria-label="Twitter">🐦</a>
+      <a href="https://facebook.com/yourprofile" target="_blank" rel="noopener noreferrer" title="Facebook" aria-label="Facebook">📘</a>
+      <a href="https://instagram.com/hahahha7381" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">📸</a>
     </div>
+  </header>
 
-    <div id="avatar-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
-      <div class="modal-content">
-        <button class="close-btn" aria-label="Close avatar modal">&times;</button>
-        <h3 id="modalTitle">Cai Jiacheng</h3>
-        <img src="https://cdn.jsdelivr.net/gh/cai-jiacheng/cai-jiacheng.github.io/images/face.webp" alt="Large portrait photo of Cai Jiacheng" />
-        <p>Hello! I'm Cai Jiacheng, an international student studying in Japan. I have a passion for programming and innovation. This website is my personal introduction.</p>
+  <button class="button" aria-expanded="false" aria-controls="aboutMeContent" onclick="toggleAboutMe()">About Me</button>
+
+  <section id="aboutMeContent" aria-hidden="true" role="region" tabindex="-1">
+    <div class="card">
+      <h2>About Me</h2>
+      <p class="intro-text">
+        Hello! I am Cai Jiacheng, an international student from Fujian, China, currently studying in Japan. I have strong skills in English and Japanese (JLPT N1), and I am passionate about technology, programming, and improving communication between cultures. I enjoy rock music and am eager to contribute to the IT industry through internships and future work.
+      </p>
+      <h3>Language Skills</h3>
+      <div class="skill">
+        <div class="skill-name">English (TOEFL 90)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="85%"></div></div>
       </div>
+      <div class="skill">
+        <div class="skill-name">Japanese (JLPT N1)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Chinese (Native)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="100%"></div></div>
+      </div>
+
+      <h3>Experience & Achievements</h3>
+      <ul>
+        <li>Created a popular Douyin (TikTok) video with over 200,000 likes.</li>
+        <li>Participated in group discussions and projects on social issues like inequality and environmental problems.</li>
+        <li>Active in student assistant roles helping international students adapt to new environments.</li>
+      </ul>
     </div>
+  </section>
+</div>
 
-    <section class="about-me" aria-label="About me section">
-      <div class="btn-group" role="tablist" aria-label="About me tabs">
-        <button id="langBtn" role="tab" aria-selected="true" aria-controls="langContent" tabindex="0" class="active">Languages</button>
-        <button id="expBtn" role="tab" aria-selected="false" aria-controls="expContent" tabindex="-1">Experience</button>
-        <button id="prBtn" role="tab" aria-selected="false" aria-controls="prContent" tabindex="-1">Self PR</button>
-      </div>
-      <div id="langContent" class="about-content active" role="tabpanel" aria-labelledby="langBtn" tabindex="0">
-        I am fluent in Chinese, Japanese (JLPT N1), and English (TOEFL 90), enabling effective communication in multilingual environments and strong adaptability.
-      </div>
-      <div id="expContent" class="about-content" role="tabpanel" aria-labelledby="expBtn" tabindex="0">
-        I have worked as a student assistant, actively helping international students adjust to new environments and participated in several cross-cultural projects, enhancing my organizational and coordination skills.
-      </div>
-      <div id="prContent" class="about-content" role="tabpanel" aria-labelledby="prBtn" tabindex="0">
-        Passionate about programming and innovation, I possess strong teamwork and self-learning abilities, aiming to contribute to Japan's IT industry.
-      </div>
-    </section>
+<footer>
+  &copy; 2025 Cai Jiacheng. All rights reserved.
+</footer>
 
-    <section class="social-links" aria-label="Social media links">
-      <a href="https://github.com/cai-jiacheng" target="_blank" rel="noopener noreferrer" aria-label="GitHub Profile" title="GitHub Profile">🐙</a>
-      <a href="https://www.linkedin.com/in/cai-jiacheng/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn Profile" title="LinkedIn Profile">🔗</a>
-      <a href="https://twitter.com/cai_jiacheng" target="_blank" rel="noopener noreferrer" aria-label="Twitter Profile" title="Twitter Profile">🐦</a>
-    </section>
-
-  </div>
-
-  <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
-
-  <script>
-    // Loading screen fadeout
-    window.addEventListener('load', () => {
-      const loading = document.getElementById('loading-screen');
-      loading.style.animationPlayState = 'running';
-      setTimeout(() => {
-        loading.style.display = 'none';
-      }, 1000);
-    });
-
-    // Dark mode toggle
-    const darkToggle = document.getElementById('darkModeToggle');
-    darkToggle.addEventListener('click', () => {
-      document.body.classList.toggle('dark');
-      const isDark = document.body.classList.contains('dark');
-      darkToggle.setAttribute('aria-pressed', isDark.toString());
-      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
-    });
-
-    // About me tabs
-    const tabs = document.querySelectorAll('.btn-group button');
-    const panels = document.querySelectorAll('.about-content');
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => {
-          t.classList.remove('active');
-          t.setAttribute('aria-selected', 'false');
-          t.setAttribute('tabindex', '-1');
-        });
-        tab.classList.add('active');
-        tab.setAttribute('aria-selected', 'true');
-        tab.setAttribute('tabindex', '0');
-
-        panels.forEach(panel => {
-          panel.classList.remove('active');
-        });
-        const target = document.getElementById(tab.getAttribute('aria-controls'));
-        target.classList.add('active');
-        target.focus();
+<script>
+  function toggleAboutMe() {
+    const content = document.getElementById('aboutMeContent');
+    const btn = document.querySelector('.button');
+    const isOpen = content.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    content.setAttribute('aria-hidden', !isOpen);
+    if (isOpen) {
+      content.focus();
+      const skillLevels = document.querySelectorAll('.skill-level');
+      skillLevels.forEach(el => {
+        const width = el.getAttribute('data-level');
+        el.style.width = width;
       });
-    });
-
-    // Avatar modal
-    const avatarWrapper = document.querySelector('.avatar-wrapper');
-    const modal = document.getElementById('avatar-modal');
-    const closeBtn = modal.querySelector('.close-btn');
-
-    function openModal() {
-      modal.classList.add('active');
-      modal.focus();
+    } else {
+      const skillLevels = document.querySelectorAll('.skill-level');
+      skillLevels.forEach(el => {
+        el.style.width = '0';
+      });
     }
-    function closeModal() {
-      modal.classList.remove('active');
-      avatarWrapper.focus();
-    }
+  }
+</script>
 
-    avatarWrapper.addEventListener('click', openModal);
-    avatarWrapper.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ' ') {
-        e.preventDefault();
-        openModal();
-      }
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    modal.addEventListener('keydown', e => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
-    });
-
-    // Close modal when clicking outside modal content
-    modal.addEventListener('click', e => {
-      if (e.target === modal) {
-        closeModal();
-      }
-    });
-  </script>
 </body>
 </html>
