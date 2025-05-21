@@ -273,4 +273,147 @@
       background: #005fbd;
     }
 
-    /* Responsive
+    /* Responsive */
+    @media (max-width: 600px) {
+      .btn-group button {
+        margin: 8px 5px;
+        width: 90px;
+        font-size: 0.9rem;
+        padding: 8px 0;
+      }
+      .avatar-wrapper {
+        width: 120px;
+      }
+      .container {
+        margin: 2rem 15px 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="loading-screen">Loading...</div>
+
+  <div class="container" role="main" aria-label="Personal introduction of Cai Jiacheng">
+
+    <h1>Cai Jiacheng</h1>
+    <h2>International Student & Programmer in Japan</h2>
+
+    <div class="avatar-wrapper" tabindex="0" aria-label="Click or press enter to view avatar in large size" role="button" aria-haspopup="dialog" aria-controls="avatar-modal">
+      <img src="https://cdn.jsdelivr.net/gh/cai-jiacheng/cai-jiacheng.github.io/images/face.webp" alt="Portrait photo of Cai Jiacheng" loading="lazy" width="160" height="160" />
+    </div>
+
+    <div id="avatar-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" tabindex="-1">
+      <div class="modal-content">
+        <button class="close-btn" aria-label="Close avatar modal">&times;</button>
+        <h3 id="modalTitle">Cai Jiacheng</h3>
+        <img src="https://cdn.jsdelivr.net/gh/cai-jiacheng/cai-jiacheng.github.io/images/face.webp" alt="Large portrait photo of Cai Jiacheng" />
+        <p>Hello! I'm Cai Jiacheng, an international student studying in Japan. I have a passion for programming and innovation. This website is my personal introduction.</p>
+      </div>
+    </div>
+
+    <section class="about-me" aria-label="About me section">
+      <div class="btn-group" role="tablist" aria-label="About me tabs">
+        <button id="langBtn" role="tab" aria-selected="true" aria-controls="langContent" tabindex="0" class="active">Languages</button>
+        <button id="expBtn" role="tab" aria-selected="false" aria-controls="expContent" tabindex="-1">Experience</button>
+        <button id="prBtn" role="tab" aria-selected="false" aria-controls="prContent" tabindex="-1">Self PR</button>
+      </div>
+      <div id="langContent" class="about-content active" role="tabpanel" aria-labelledby="langBtn" tabindex="0">
+        I am fluent in Chinese, Japanese (JLPT N1), and English (TOEFL 90), enabling effective communication in multilingual environments and strong adaptability.
+      </div>
+      <div id="expContent" class="about-content" role="tabpanel" aria-labelledby="expBtn" tabindex="0">
+        I have worked as a student assistant, actively helping international students adjust to new environments and participated in several cross-cultural projects, enhancing my organizational and coordination skills.
+      </div>
+      <div id="prContent" class="about-content" role="tabpanel" aria-labelledby="prBtn" tabindex="0">
+        Passionate about programming and innovation, I possess strong teamwork and self-learning abilities, aiming to contribute to Japan's IT industry.
+      </div>
+    </section>
+
+    <section class="social-links" aria-label="Social media links">
+      <a href="https://instagram.com/hahahha7381" target="_blank" rel="noopener noreferrer" title="Instagram" aria-label="Instagram">📸</a>
+    </section>
+
+  </div>
+
+  <button id="darkModeToggle" aria-pressed="false" aria-label="Toggle dark mode">Dark Mode</button>
+
+  <script>
+    // Loading screen fadeout
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading-screen');
+      loading.style.animationPlayState = 'running';
+      setTimeout(() => {
+        loading.style.display = 'none';
+      }, 1000);
+    });
+
+    // Dark mode toggle
+    const darkToggle = document.getElementById('darkModeToggle');
+    darkToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark');
+      const isDark = document.body.classList.contains('dark');
+      darkToggle.setAttribute('aria-pressed', isDark.toString());
+      darkToggle.textContent = isDark ? 'Light Mode' : 'Dark Mode';
+    });
+
+    // About me tabs
+    const tabs = document.querySelectorAll('.btn-group button');
+    const panels = document.querySelectorAll('.about-content');
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+          t.setAttribute('tabindex', '-1');
+        });
+        tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
+        tab.setAttribute('tabindex', '0');
+
+        panels.forEach(panel => {
+          panel.classList.remove('active');
+        });
+        const target = document.getElementById(tab.getAttribute('aria-controls'));
+        target.classList.add('active');
+        target.focus();
+      });
+    });
+
+    // Avatar modal
+    const avatarWrapper = document.querySelector('.avatar-wrapper');
+    const modal = document.getElementById('avatar-modal');
+    const closeBtn = modal.querySelector('.close-btn');
+
+    function openModal() {
+      modal.classList.add('active');
+      modal.focus();
+    }
+    function closeModal() {
+      modal.classList.remove('active');
+      avatarWrapper.focus();
+    }
+
+    avatarWrapper.addEventListener('click', openModal);
+    avatarWrapper.addEventListener('keydown', e => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openModal();
+      }
+    });
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('keydown', e => {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // Close modal when clicking outside modal content
+    modal.addEventListener('click', e => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+  </script>
+</body>
+</html>
