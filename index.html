@@ -224,14 +224,58 @@
     <div class="card">
       <h2>About Me</h2>
       <p class="intro-text">
-        Hello! I am Cai Jiacheng, an international student from Fujian, China. I am passionate about programming and cultural exchange. I love helping people overcome language barriers and adapting to new environments smoothly.
+        Hello! I am Cai Jiacheng, an international student from Fujian, China, currently studying in Japan. I have strong skills in English and Japanese (JLPT N1), and I am passionate about technology, programming, and improving communication between cultures. I enjoy rock music and am eager to contribute to the IT industry through internships and future work.
       </p>
-      <p class="intro-text">
-        Currently, I am deepening my skills in coding and IT, aiming to work in Japan's tech industry after graduation. I believe continuous learning and adaptability are keys to success in this fast-changing world.
-      </p>
-    </div>
-
-    <div class="card">
-      <h2>Language Skills</h2>
+      <h3>Language Skills</h3>
       <div class="skill">
-        <div class
+        <div class="skill-name">English (TOEFL 90)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="85%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Japanese (JLPT N1)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="80%"></div></div>
+      </div>
+      <div class="skill">
+        <div class="skill-name">Chinese (Native)</div>
+        <div class="skill-bar"><div class="skill-level" data-level="100%"></div></div>
+      </div>
+
+      <h3>Experience & Achievements</h3>
+      <ul>
+        <li>Created a popular Douyin (TikTok) video with over 200,000 likes.</li>
+        <li>Participated in group discussions and projects on social issues like inequality and environmental problems.</li>
+        <li>Active in student assistant roles helping international students adapt to new environments.</li>
+      </ul>
+    </div>
+  </section>
+</div>
+
+<footer>
+  &copy; 2025 Cai Jiacheng. All rights reserved.
+</footer>
+
+<script>
+  function toggleAboutMe() {
+    const content = document.getElementById('aboutMeContent');
+    const btn = document.querySelector('.button');
+    const isOpen = content.classList.toggle('open');
+    btn.setAttribute('aria-expanded', isOpen);
+    content.setAttribute('aria-hidden', !isOpen);
+    if (isOpen) {
+      content.focus();
+      const skillLevels = document.querySelectorAll('.skill-level');
+      skillLevels.forEach(el => {
+        const width = el.getAttribute('data-level');
+        el.style.width = width;
+      });
+    } else {
+      const skillLevels = document.querySelectorAll('.skill-level');
+      skillLevels.forEach(el => {
+        el.style.width = '0';
+      });
+    }
+  }
+</script>
+
+</body>
+</html>
